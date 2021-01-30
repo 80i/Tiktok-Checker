@@ -29,7 +29,7 @@ time.sleep(.3)
 while True:
     try:
         usernames = ('').join(random.choices(string.ascii_lowercase + string.digits, k=hmletters))
-        #webhook = DiscordWebhook(url=wbhook, content=f'`{usernames}` | Might be Available or Banned on => ||`{webss}`|| |')
+        #webhook = DiscordWebhook(url=wbhook, content=f'`{usernames}` | Might be Available|')
         r = requests.get(f'https://m.tiktok.com/node/share/user/@{usernames}')
         responsecode = r.json()['statusCode']
         
