@@ -20,34 +20,33 @@ Discord Server :  https://discord.gg/eJeHG7D6pm
      Insta : @K4S 
       Snap : Fuun
 """+Fore.WHITE)
-
 time.sleep(.5)
-
 hmletters = int(input('how many letters you want to check : '))
 print("")
 #wbhook = input("Webhook url : ")
 print()
 time.sleep(.3)
-
-
 while True:
-    usernames = ('').join(random.choices(string.ascii_lowercase + string.digits, k=hmletters))
-    #webhook = DiscordWebhook(url=wbhook, content=f'`{usernames}` | Might be Available or Banned on => ||`{webss}`|| |')
-    r = requests.get(f'https://m.tiktok.com/node/share/user/@{usernames}')
-    responsecode = r.json()['statusCode']
-    
-    if responsecode == 10202:
-        print(Fore.CYAN + "[+] " + Fore.GREEN + "Available" + Fore.WHITE + ' |=>' + Fore.LIGHTMAGENTA_EX + f' {usernames}'+Fore.WHITE+" <=|" + Fore.CYAN + " [+]")
-        f = open("availables.txt", "a", encoding='utf-8')
-        f.write(f"{usernames} | Might be Available or Banned|\n")
-        #webhook.execute()
-    elif responsecode == 10222:
-        print(Fore.CYAN+"[-] "+Fore.RED + "UnAvailable"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
-    elif responsecode == 0:
-        print(Fore.CYAN+"[-] "+Fore.RED + "UnAvailable"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
-    elif responsecode == 10221:
-        print(Fore.CYAN+"[-] "+Fore.RED + "Banned"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
-    elif responsecode == 10223:
-        print(Fore.CYAN+"[-] "+Fore.RED + "Banned"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
-    else:
-        print(Fore.CYAN+"[X] "+Fore.WHITE+f"i cant find {usernames}'s statusCode !!' "+Fore.CYAN+" [X]"+Fore.WHITE)
+    try:
+        usernames = ('').join(random.choices(string.ascii_lowercase + string.digits, k=hmletters))
+        #webhook = DiscordWebhook(url=wbhook, content=f'`{usernames}` | Might be Available or Banned on => ||`{webss}`|| |')
+        r = requests.get(f'https://m.tiktok.com/node/share/user/@{usernames}')
+        responsecode = r.json()['statusCode']
+        
+        if responsecode == 10202:
+            print(Fore.CYAN + "[+] " + Fore.GREEN + "Available" + Fore.WHITE + ' |=>' + Fore.LIGHTMAGENTA_EX + f' {usernames}'+Fore.WHITE+" <=|" + Fore.CYAN + " [+]")
+            f = open("availables.txt", "a", encoding='utf-8')
+            f.write(f"{usernames} | Might be Available or Banned|\n")
+            #webhook.execute()
+        elif responsecode == 10222:
+           print(Fore.CYAN+"[-] "+Fore.RED + "UnAvailable"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
+        elif responsecode == 0:
+            print(Fore.CYAN+"[-] "+Fore.RED + "UnAvailable"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
+        elif responsecode == 10221:
+            print(Fore.CYAN+"[-] "+Fore.RED + "Banned"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
+        elif responsecode == 10223:
+            print(Fore.CYAN+"[-] "+Fore.RED + "Banned"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
+        else:
+            print(Fore.CYAN+"[X] "+Fore.WHITE+f"i cant find {usernames}'s statusCode !!' "+Fore.CYAN+" [X]"+Fore.WHITE)
+    except:
+        pass
