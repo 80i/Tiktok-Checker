@@ -25,7 +25,7 @@ time.sleep(.5)
 
 hmletters = int(input('how many letters you want to check : '))
 print("")
-#wbhook = 'https://discord.com/api/webhooks/803917756138782732/UJoDveWMHPeWNQHAovOfM4MUjsv4N9gKWmFHpoW7_S7NyEDl1JNp-jurZF48NG1eo7MI'
+#wbhook = input("Webhook url : ")
 print()
 time.sleep(.3)
 
