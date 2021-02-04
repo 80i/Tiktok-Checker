@@ -36,7 +36,7 @@ while True:
         if responsecode == 10202:
             print(Fore.CYAN + "[+] " + Fore.GREEN + "Available" + Fore.WHITE + ' |=>' + Fore.LIGHTMAGENTA_EX + f' {usernames}'+Fore.WHITE+" <=|" + Fore.CYAN + " [+]")
             f = open("availables.txt", "a", encoding='utf-8')
-            f.write(f"{usernames} | Might be Available or Banned|\n")
+            f.write(f"{usernames} | Might be Available or Valid|\n")
             #webhook.execute()
         elif responsecode == 10222:
            print(Fore.CYAN+"[-] "+Fore.RED + "UnAvailable"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
