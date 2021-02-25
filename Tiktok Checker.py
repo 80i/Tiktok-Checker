@@ -1,7 +1,6 @@
-import random, string, requests, time
+import requests, time, sys, os, concurrent.futures
 from colorama import Fore
 from discord_webhook import DiscordWebhook
-import os
 os.system("cls" or "clear")
 print(Fore.RED+"""
 
@@ -21,32 +20,47 @@ Discord Server :  https://discord.gg/eJeHG7D6pm
       Snap : Fuun
 """+Fore.WHITE)
 time.sleep(.5)
-hmletters = int(input('how many letters you want to check : '))
 print("")
-#wbhook = input("Webhook url : ")
 print()
 time.sleep(.3)
-while True:
+def checker(usernames):
     try:
-        usernames = ('').join(random.choices(string.ascii_lowercase + string.digits, k=hmletters))
-        #webhook = DiscordWebhook(url=wbhook, content=f'`{usernames}` | Might be Available|')
         r = requests.get(f'https://m.tiktok.com/node/share/user/@{usernames}')
         responsecode = r.json()['statusCode']
         
         if responsecode == 10202:
             print(Fore.CYAN + "[+] " + Fore.GREEN + "Available" + Fore.WHITE + ' |=>' + Fore.LIGHTMAGENTA_EX + f' {usernames}'+Fore.WHITE+" <=|" + Fore.CYAN + " [+]")
             f = open("availables.txt", "a", encoding='utf-8')
-            f.write(f"{usernames} | Might be Available or Valid|\n")
-            #webhook.execute()
+            f.write(f"{usernames} | Might be Available |\n")
         elif responsecode == 10222:
            print(Fore.CYAN+"[-] "+Fore.RED + "UnAvailable"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
+           f = open("taken.txt", "a", encoding='utf-8')
+           f.write(f"{usernames} \n")
+        elif responsecode == 10225:
+            print(Fore.CYAN+"[-] "+Fore.RED + "UnAvailable"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
+            f = open("taken.txt", "a", encoding='utf-8')
+            f.write(f"{usernames} \n")
         elif responsecode == 0:
             print(Fore.CYAN+"[-] "+Fore.RED + "UnAvailable"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
+            f = open("taken.txt", "a", encoding='utf-8')
+            f.write(f"{usernames} \n")
         elif responsecode == 10221:
             print(Fore.CYAN+"[-] "+Fore.RED + "Banned"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
+            f = open("banned.txt", "a", encoding='utf-8')
+            f.write(f"{usernames} \n")
         elif responsecode == 10223:
             print(Fore.CYAN+"[-] "+Fore.RED + "Banned"+ Fore.WHITE +' |=>'+Fore.YELLOW+ f' {usernames}'+Fore.WHITE+" <=|"+Fore.CYAN+" [-]")
+            f = open("banned.txt", "a", encoding='utf-8')
+            f.write(f"{usernames} \n")
         else:
-            print(Fore.CYAN+"[X] "+Fore.WHITE+f"i cant find {usernames}'s statusCode !!' "+Fore.CYAN+" [X]"+Fore.WHITE)
+            print(Fore.CYAN+"[X] "+Fore.WHITE+f"i cant find {usernames} 's statusCode !!' "+Fore.CYAN+" [X]"+Fore.WHITE)
+            f = open("unknown.txt", "a", encoding='utf-8')
+            f.write(f"{usernames} \n")
     except:
         pass
+
+
+with open('usernames.txt', 'r') as f:
+    usernames = [line.strip() for line in f]
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    executor.map(checker, usernames)
