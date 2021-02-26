@@ -4,7 +4,7 @@ from discord_webhook import DiscordWebhook
 os.system("cls" or "clear")
 print(Fore.RED+"""
 
-Discord Server :  https://discord.gg/eJeHG7D6pm
+Discord Server :  https://discord.gg/HWdgMvFFdY
         My discord : @K4Sp3r#1337
 
  _________  _   __      _________       __              ______  __                    __                     
